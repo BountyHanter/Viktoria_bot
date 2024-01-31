@@ -17,10 +17,11 @@ router = Router()
 async def start(message: Message):
     await message.answer(f'Привет {message.from_user.first_name}, что хочешь сделать??', reply_markup=start_buttons())
 
-@router.message(Command('/cancel'))
+
+@router.message(Command('cancel'))
 async def cancel(message: Message, state: FSMContext):
     await state.clear()
-    await message.answer('Все этапы были отменены.')
+    await message.answer('Все этапы были отменены, можешь начинать сначала', reply_markup=start_buttons())
 
 
 # Отрабатываем Stage's для получения информации для карточки

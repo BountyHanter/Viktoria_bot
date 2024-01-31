@@ -4,11 +4,13 @@ import logging
 from routers import commands
 from settings import settings
 from aiogram import Bot, Dispatcher
+from bot_commands.bot_commands import set_commands
 
 
 # Старт бота
 async def start_bot():
     bot = Bot(token=settings.bots.bot_token)
+    await set_commands(bot)
 
     dp = Dispatcher()
     dp.include_router(
