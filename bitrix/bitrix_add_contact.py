@@ -17,15 +17,16 @@ class NewContact:
     def __init__(self, name: str,
                  second_name: str,
                  city: str,
-                 job_title: str,):
-                 #tenchat_link: str,):
-        self.url = f"https://{client_url}/rest/1/{webhook_contact_add}/crm.contact.add"
+                 job_title: str,
+                 tenchat_link: str,):
+        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.contact.add"
         self.data = {
             "fields": {
                 "ADDRESS_CITY": f"{city}",
                 "LAST_NAME": f"{second_name}",
                 "NAME": f"{name}",
                 "POST": f"{job_title}",
+                "SOURCE_DESCRIPTION": f"{tenchat_link}"
             },
             "params": {
                 "REGISTER_SONET_EVENT": "Y"
@@ -56,7 +57,7 @@ class NewContact:
 
 if __name__ == "__main__":
     # Тест
-    gg = NewContact('Александр','Шляпик', 'Мухосранск', 'Шестёрка')
+    gg = NewContact('Александр','Шляпик', 'Город', 'Шестёрка', 'Ссылка')
     gg.send_request()
 
 

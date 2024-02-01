@@ -88,7 +88,7 @@ async def bitrix_city(message: Message, state: FSMContext):
     await message.answer('Отлично, сейчас отправлю запрос и отпишусь')
 
     # Запускаем создание контакта
-    contact = bitrix_add_contact.NewContact(info['name'], info['second_name'], info['city'], info['job_title'])
+    contact = bitrix_add_contact.NewContact(info['name'], info['second_name'], info['city'], info['job_title'], info['tenchat_link'])
     respond_id = contact.send_request() # Получаем результат создания контакта
     if respond_id is None:
         await message.answer('⚠⚠⚠ООй-ой, что то пошло не так на этапе создания ➡контакта⬅, '

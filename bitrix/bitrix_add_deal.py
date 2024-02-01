@@ -15,7 +15,7 @@ class NewDeal:
     def __init__(self, comment: str, id: int,):
         self.comment = comment
         self.id = id
-        self.url = f"https://{client_url}/rest/1/{webhook_deal_add}/crm.deal.add"
+        self.url = f"https://{client_url}/rest/13/{webhook_deal_add}/crm.deal.add"
 
     def send_request(self):
         # Получаем путь к текущему файлу
