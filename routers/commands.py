@@ -81,7 +81,7 @@ async def bitrix_city(message: Message, state: FSMContext):
 
 
 @router.message(Bitrix.comment)
-async def bitrix_city(message: Message, state: FSMContext):
+async def bitrix_city(message: Message, state: FSMContext, bot: Bot):
     await state.update_data(comment=message.text)
     get_data = await state.get_data()
     info['comment'] = get_data.get('comment')
@@ -91,7 +91,7 @@ async def bitrix_city(message: Message, state: FSMContext):
     contact = bitrix_add_contact.NewContact(info['name'], info['second_name'], info['city'], info['job_title'], info['tenchat_link'])
     respond_id = contact.send_request() # Получаем результат создания контакта
     if respond_id is None:
-        await message.answer('⚠⚠⚠ООй-ой, что то пошло не так на этапе создания ➡контакта⬅, '
+        await bot.send_message('⚠⚠⚠ООй-ой, что то пошло не так на этапе создания ➡контакта⬅, '
                              ' сообщи разработчику чтобы он проверил логи🔎🔎🔎, или попробуй еще раз',
                              reply_markup=start_buttons())
         return
