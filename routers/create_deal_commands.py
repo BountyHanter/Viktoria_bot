@@ -57,7 +57,7 @@ async def bitrix_second_name(message: Message, state: FSMContext):
     info.company_name = get_data.get('company_name')
     await state.update_data(info=info)  # обновляем info в state
     await state.set_state(Bitrix.city)
-    await message.answer('Теперь ввеёди город')
+    await message.answer('Теперь введи город')
 
 
 @router.message(Bitrix.city)
@@ -158,14 +158,14 @@ async def comment_to_discussion(message: Message, state: FSMContext):
         # Ошибка при создании комментария к обсуждению
         await message.answer(comment_to_discus_add_error, reply_markup=start_buttons())
         return
-    await update_data(state)  # Загружаем данные сделки в кэш
+    # await update_data(state)  # Загружаем данные сделки в кэш
     await message.answer(comment_add_ok, reply_markup=start_buttons())
 
 
 # Не добавляем комментарий
 @router.callback_query(MyCallback.filter(F.foo == 'not_add_comment_to_dicscussion'))
 async def not_comment(query: CallbackQuery, bot: Bot, state: FSMContext):
-    await update_data(state)  # Загружаем данные сделки в кэш
+    # await update_data(state)  # Загружаем данные сделки в кэш
     await bot.answer_callback_query(query.id)
     await bot.edit_message_reply_markup(query.from_user.id, query.message.message_id)  # удаляем кнопку
     await query.answer()

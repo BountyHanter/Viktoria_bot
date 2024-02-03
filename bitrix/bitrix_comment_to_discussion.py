@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.dev_urls import client_url, webhook_deal_upd
+from bitrix.urls import client_url, webhook_contact_add
 import os
 
 
@@ -15,7 +15,7 @@ class AddComment:
     def __init__(self, comment: str, id: int,):
         self.comment = comment
         self.id = id
-        self.url = f"https://{client_url}/rest/1/{webhook_deal_upd}/crm.timeline.comment.add"
+        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.timeline.comment.add"
 
     def send_request(self):
         # Получаем путь к текущему файлу
@@ -38,10 +38,6 @@ class AddComment:
         response = requests.post(self.url, json=data)
         if response.status_code == 200:
             print("Добавлен комментарий в обсуждение с ID " + str(response.json()))
-            with open(counter_file_path, 'r+') as f:
-                f.seek(0)
-                f.write(str(number+1))
-                f.truncate()
         else:
             now = datetime.now()
             now_str = now.strftime("%Y-%m-%d_%H-%M-%S")

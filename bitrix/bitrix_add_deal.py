@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.dev_urls import client_url, webhook_deal_upd
+from bitrix.urls import client_url, webhook_contact_add
 import os
 
 
@@ -16,7 +16,7 @@ class NewDeal:
         self.comment = comment
         self.id = id
         self.company_id = company_id
-        self.url = f"https://{client_url}/rest/1/{webhook_deal_upd}/crm.deal.add"
+        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.deal.add"
 
     def send_request(self):
         # Получаем путь к текущему файлу

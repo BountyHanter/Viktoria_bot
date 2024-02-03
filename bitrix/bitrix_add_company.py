@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.dev_urls import client_url, webhook_contact_add
+from bitrix.urls import client_url, webhook_contact_add
 
 
 class NewCompany:
@@ -15,7 +15,7 @@ class NewCompany:
 
     """
     def __init__(self, name: str,):
-        self.url = f"https://{client_url}/rest/1/{webhook_contact_add}/crm.company.add"
+        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.company.add"
         self.data = {
             "fields": {
                 "TITLE": f"{name}",
