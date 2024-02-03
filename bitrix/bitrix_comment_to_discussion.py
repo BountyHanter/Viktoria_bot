@@ -5,7 +5,7 @@ from bitrix.dev_urls import client_url, webhook_deal_upd
 import os
 
 
-class NewDeal:
+class AddComment:
     """
     id - id клиента который получаем из bitrix_add_contact
     Получаем данные со счётчика, для названия карточки, отправляем данные на сайт, получаем ответ
@@ -59,7 +59,7 @@ class NewDeal:
 
 if __name__ == '__main__':
     # тест
-    gg = NewDeal('Коммент сделки',53)
+    gg = AddComment('Коммент сделки',53)
     gg.send_request()
 
 
