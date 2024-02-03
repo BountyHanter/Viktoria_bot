@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.urls import client_url, webhook_contact_add
+from bitrix.dev_urls import client_url, webhook_contact_add
 
 
 class NewContact:
@@ -19,14 +19,14 @@ class NewContact:
                  city: str,
                  job_title: str,
                  tenchat_link: str,):
-        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.contact.add"
+        self.url = f"https://{client_url}/rest/1/{webhook_contact_add}/crm.contact.add"
         self.data = {
             "fields": {
                 "ADDRESS_CITY": f"{city}",
                 "LAST_NAME": f"{second_name}",
                 "NAME": f"{name}",
                 "POST": f"{job_title}",
-                "SOURCE_DESCRIPTION": f"{tenchat_link}"
+                "UF_CRM_1706861554878": f"{tenchat_link}"
             },
             "params": {
                 "REGISTER_SONET_EVENT": "Y"
@@ -57,7 +57,7 @@ class NewContact:
 
 if __name__ == "__main__":
     # Тест
-    gg = NewContact('Александр','Шляпик', 'Город', 'Шестёрка', 'Ссылка')
+    gg = NewContact('Александр2','Шляпик1', 'Город', 'Шестёрка', 'https://tenchat.ru/angelina_arttt')
     gg.send_request()
 
 

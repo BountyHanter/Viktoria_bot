@@ -3,7 +3,7 @@ import logging
 import json
 import sys
 
-from routers import commands
+from routers import tech_commands, create_deal_commands, show_deals
 from settings import settings
 from aiogram import Bot, Dispatcher
 from bot_commands.bot_commands import set_commands
@@ -27,12 +27,15 @@ class JsonFormatter(logging.Formatter):
 
 # Старт бота
 async def start_bot():
-    bot = Bot(token=settings.bots.bot_token)
+    bot = Bot(token=settings.bots.bot_token, parse_mode='MarkdownV2')
     await set_commands(bot)
 
     dp = Dispatcher()
-    dp.include_router(
-        commands.router
+    dp.include_routers(
+        tech_commands.router,
+        create_deal_commands.router,
+        show_deals.router,
+
     )
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s - [%(levelname)s] - %(name)s - "

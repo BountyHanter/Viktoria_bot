@@ -13,25 +13,35 @@ def start_buttons():
     builder.row(
         InlineKeyboardButton(
             text='Создать сделку',
-            callback_data=MyCallback(foo='Bitrix24').pack())
+            callback_data=MyCallback(foo='Bitrix24').pack()),
+        InlineKeyboardButton(
+            text='Отобразить сделки',
+            callback_data=MyCallback(foo='show_deals').pack()),
+        )
+    return builder.as_markup()
+
+
+def add_comment_to_discussion():
+    builder = InlineKeyboardBuilder()
+    builder.row(
+        InlineKeyboardButton(
+            text='Добавить',
+            callback_data=MyCallback(foo='add_comment_to_dicscussion').pack()),
+        InlineKeyboardButton(
+            text='Не добавлять',
+            callback_data=MyCallback(foo='not_add_comment_to_dicscussion').pack()),
+
     )
     return builder.as_markup()
 
 
-"""
-start_buttons = InlineKeyboardMarkup(inline_keyboard=[
-    [
+def what_do_with_deal():
+    builder = InlineKeyboardBuilder()
+    builder.row(
         InlineKeyboardButton(
-            text='Создать заказ на Битрикс24',
-            callback_data=MyCallback(foo='Bitrix24')
-        )
-    ],
-    [
+            text='Добавить комментарий',
+            callback_data=MyCallback(foo='comment_deal').pack()),
         InlineKeyboardButton(
-            text='Место для других функций',
-            callback_data='Button2'
-        )
-    ]
-])
-"""
-
+            text='Удалить сделку',
+            callback_data=MyCallback(foo='delete_deal').pack()),
+    )

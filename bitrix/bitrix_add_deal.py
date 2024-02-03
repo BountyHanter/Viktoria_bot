@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.urls import client_url, webhook_deal_add
+from bitrix.dev_urls import client_url, webhook_deal_upd
 import os
 
 
@@ -12,10 +12,11 @@ class NewDeal:
     Если ответ 200 - прибавляем к счётчику +1 и возвращаем True
     Если получили ошибку - формируется json файл с url, данными и ошибкой и возвращает False
     """
-    def __init__(self, comment: str, id: int,):
+    def __init__(self, comment: str, id: int, company_id: int):
         self.comment = comment
         self.id = id
-        self.url = f"https://{client_url}/rest/13/{webhook_deal_add}/crm.deal.add"
+        self.company_id = company_id
+        self.url = f"https://{client_url}/rest/1/{webhook_deal_upd}/crm.deal.add"
 
     def send_request(self):
         # Получаем путь к текущему файлу
@@ -33,6 +34,7 @@ class NewDeal:
                 "COMMENTS": f"{self.comment}",
                 "CONTACT_ID": f"{self.id}",
                 "TITLE": f"Сделка №{number}_BOT",
+                "COMPANY_ID": f"{self.company_id}"
             },
             "params": {
                 "REGISTER_SONET_EVENT": "Y"
@@ -45,6 +47,8 @@ class NewDeal:
                 f.seek(0)
                 f.write(str(number+1))
                 f.truncate()
+            data = response.json()
+            data_id = int(data['result'])
         else:
             now = datetime.now()
             now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -57,7 +61,7 @@ class NewDeal:
             }
             with open(filename, 'w') as f:
                 json.dump(error_data, f)
-        return True if response.status_code == 200 else False
+        return [data_id, number] if response.status_code == 200 else False
 
 
 if __name__ == '__main__':
