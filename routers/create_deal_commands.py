@@ -2,7 +2,7 @@ from aiogram import F, Bot, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-import bitrix_add_company
+from bitrix import bitrix_add_company
 from keyboards.inline import MyCallback, start_buttons, add_comment_to_discussion
 from text_answers.answers import deal_add_ok, comment_add_ok, contact_add_error, deal_add_error, \
     comment_to_discus_add_error, company_add_error
