@@ -34,7 +34,7 @@ async def start_bot():
     dp.include_routers(
         tech_commands.router,
         create_deal_commands.router,
-        show_deals.router,
+        # show_deals.router,
 
     )
     logging.basicConfig(level=logging.INFO,

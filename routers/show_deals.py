@@ -1,3 +1,8 @@
+"""
+___________________________________
+Пока что изолирована и не нужна
+___________________________________
+
 import json
 import os
 
@@ -46,3 +51,5 @@ async def show_deals(query: CallbackQuery, bot: Bot, state: FSMContext):
     await bot.edit_message_reply_markup(query.from_user.id, query.message.message_id)  # удаляем кнопку
     await query.answer()
     await query.message.answer(print_deals())
+
+"""

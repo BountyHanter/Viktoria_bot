@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from bitrix.dev_urls import client_url, webhook_contact_add
+from bitrix.urls import client_url, webhook_contact_add
 
 
 class NewContact:
@@ -19,7 +19,7 @@ class NewContact:
                  city: str,
                  job_title: str,
                  tenchat_link: str,):
-        self.url = f"https://{client_url}/rest/1/{webhook_contact_add}/crm.contact.add"
+        self.url = f"https://{client_url}/rest/13/{webhook_contact_add}/crm.contact.add"
         self.data = {
             "fields": {
                 "ADDRESS_CITY": f"{city}",
